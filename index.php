@@ -11,12 +11,10 @@ body {
   padding-top: 30px;
   font-size: 14px;
 }
-
 h1 {
   font-size: 1.5em;
   color: #666666;
 }
-
 h2, a {
   font-size: 0.8em;
   color: #9BC788;
@@ -25,12 +23,10 @@ a.result-option{
   color: white;
   text-decoration: none;
 }
-
 h3 {
   color: #999;
   margin-top: 40px;
 }
-
 /* ============================ */
 /* VARIABLES                    */
 /* ============================ */
@@ -42,7 +38,6 @@ h3 {
   background: aqua;
   padding:20px;
 }
-
 .search-box {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -51,7 +46,6 @@ h3 {
   height: 40px;
   position: relative;
 }
-
 .search-icon {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -63,7 +57,6 @@ h3 {
   font-size: 1.3em;
   padding: 7px 15px;
 }
-
 .search-input {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -80,7 +73,6 @@ h3 {
   position: relative;
   outline: 0px;
 }
-
 @-webkit-keyframes fadeInTop {
   0% {
     opacity: 0;
@@ -345,12 +337,22 @@ label:hover:before {
 <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>
 <script type="text/javascript">
 
-  var MAP_DIV_ELEMENT_ID = "google_map";
+var MAP_DIV_ELEMENT_ID = "google_map";
+var MAP_DIV_ELEMENT_ID = "google_map";
 
   var DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS = 1;
   var DEFAULT_CENTER_LATITUDE = 22;
   var DEFAULT_CENTER_LONGITUDE = 13;
   var DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS = 15;
+
+  // This is the zoom level required to position the marker
+  var REQUIRED_ZOOM = 15;
+  google.load("maps", "2.x");
+  // The google map variable
+  var map = null;
+  // The marker variable, when it is null no marker has been added
+  var marker = null;
+
 
   // This is the zoom level required to position the marker
   var REQUIRED_ZOOM = 15;
@@ -363,14 +365,17 @@ label:hover:before {
   // The marker variable, when it is null no marker has been added
   var marker = null;
 
+
   function initializeGoogleMap() {
     map = new google.maps.Map2(document.getElementById(MAP_DIV_ELEMENT_ID));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-
     map.setMapType(G_NORMAL_MAP);
-
     map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
+    GEvent.addListener(map, "click", googleMapClickHandler);
+  }
+  function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+
 
     GEvent.addListener(map, "click", googleMapClickHandler);
   }
@@ -391,11 +396,8 @@ label:hover:before {
     }
 
     window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
-
   }
-
   google.setOnLoadCallback(initializeGoogleMap);
-
 
 </script>
 
@@ -431,16 +433,12 @@ label:hover:before {
     }
   });
   searchInput = document.getElementById('search');
-
   resultsOutput = document.getElementById('results');
-
   searchInput.addEventListener('keyup', (e) => {
     var suggested, value;
     var values = ["", "", ""];
     value = searchInput.value.toLowerCase().split(' ');
-
     for(var i = 0; i < value.length; i += 1) values[i] = value[i];
-
     $.post("handle_search.php",
     {
         first: values[0],
@@ -457,10 +455,7 @@ label:hover:before {
           resultsOutput.innerHTML = res;
         }else console.log("Error");
     });
-
   });
-
 }).call(this);
-
 </script>
 </body></html>
