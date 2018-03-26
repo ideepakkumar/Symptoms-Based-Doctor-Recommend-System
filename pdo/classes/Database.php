@@ -7,7 +7,7 @@ class Database
   private $host = "localhost";
   private $user = "root";
   private $pass = "";
-  private $dbname = "docsrecord";
+  private $dbname = "test";
 
   private $dbh;
   private $error;

@@ -1,6 +1,6 @@
 <html lang="en" class="">
 <head>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -310,32 +310,34 @@ label:hover:before {
 
 <div id = "main-content-C">
   <p>Please select all the symptoms you have.</p>
-  <input type="checkbox" id="test1" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test1" class = "col-md-2 col-sm-3 col-xs-5"/>muscle pain</label>
-  <input type="checkbox" id="test2" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test2" class = "col-md-2 col-sm-3 col-xs-5"/>chest pain</label>
-  <input type="checkbox" id="test3" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test3" class = "col-md-2 col-sm-3 col-xs-5"/>headache</label>
-  <input type="checkbox" id="test4" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test4" class = "col-md-2 col-sm-3 col-xs-5"/>abdominal pain</label>
-  <input type="checkbox" id="test5" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test5" class = "col-md-2 col-sm-3 col-xs-5"/>fatigue</label>
-  <input type="checkbox" id="test6" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test6" class = "col-md-2 col-sm-3 col-xs-5"/>nausea</label>
-  <input type="checkbox" id="test7" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test7" class = "col-md-2 col-sm-3 col-xs-5"/>anxiety</label>
-  <input type="checkbox" id="test8" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test8" class = "col-md-2 col-sm-3 col-xs-5"/>common cold</label>
-  <input type="checkbox" id="test9" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test9" class = "col-md-2 col-sm-3 col-xs-5"/>dizziness</label>
-  <input type="checkbox" id="test10" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test10" class = "col-md-2 col-sm-3 col-xs-5"/>diarrhea</label>
-  <input type="checkbox" id="test11" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test11" class = "col-md-2 col-sm-3 col-xs-5"/>constipation</label>
-  <input type="checkbox" id="test12" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test12" class = "col-md-2 col-sm-3 col-xs-5"/>vomiting</label>
-  <input type="checkbox" id="test13" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test13" class = "col-md-2 col-sm-3 col-xs-5"/>allergy</label>
-  <input type="checkbox" id="test14" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test14" class = "col-md-2 col-sm-3 col-xs-5"/>skin rashes</label>
-  <input type="checkbox" id="test15" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test15" class = "col-md-2 col-sm-3 col-xs-5"/>fever</label>
-  <input type="checkbox" id="test16" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test16" class = "col-md-2 col-sm-3 col-xs-5"/>insomnia</label>
-  <input type="checkbox" id="test17" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test17" class = "col-md-2 col-sm-3 col-xs-5"/>hypertension</label>
-  <input type="checkbox" id="test18" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test18" class = "col-md-2 col-sm-3 col-xs-5"/>cough</label>
-  <input type="checkbox" id="test19" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test19" class = "col-md-2 col-sm-3 col-xs-5"/>joint pain</label>
-  <input type="checkbox" id="test20" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test20" class = "col-md-2 col-sm-3 col-xs-5"/>weight loss</label>
-  <input type="checkbox" id="test21" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test21" class = "col-md-2 col-sm-3 col-xs-5"/>weight gain</label>
-  <input type="checkbox" id="test22" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test22" class = "col-md-2 col-sm-3 col-xs-5"/>irritaion in eyes</label>
-  <input type="checkbox" id="test23" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test23" class = "col-md-2 col-sm-3 col-xs-5"/>hypotension</label>
-  <input type="checkbox" id="test24" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test24" class = "col-md-2 col-sm-3 col-xs-5"/>hair loss</label>
-  <input type="checkbox" id="test25" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test25" class = "col-md-2 col-sm-3 col-xs-5"/>stress</label>
-
+<form action = "rec.php" method = "GET">
+  <input type="checkbox" name = "muscle pain" id="test1" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test1" class = "col-md-2 col-sm-3 col-xs-5"/>muscle pain</label>
+  <input type="checkbox" name = "chest pain" id="test2" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test2" class = "col-md-2 col-sm-3 col-xs-5"/>chest pain</label>
+  <input type="checkbox" name = "headache" id="test3" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test3" class = "col-md-2 col-sm-3 col-xs-5"/>headache</label>
+  <input type="checkbox" name = "abdominal pain" id="test4" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test4" class = "col-md-2 col-sm-3 col-xs-5"/>abdominal pain</label>
+  <input type="checkbox" name = "fatigue" id="test5" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test5" class = "col-md-2 col-sm-3 col-xs-5"/>fatigue</label>
+  <input type="checkbox" name = "nausea" id="test6" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test6" class = "col-md-2 col-sm-3 col-xs-5"/>nausea</label>
+  <input type="checkbox" name = "anxiety" id="test7" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test7" class = "col-md-2 col-sm-3 col-xs-5"/>anxiety</label>
+  <input type="checkbox" name = "common cold" id="test8" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test8" class = "col-md-2 col-sm-3 col-xs-5"/>common cold</label>
+  <input type="checkbox" name = "dizziness" id="test9" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test9" class = "col-md-2 col-sm-3 col-xs-5"/>dizziness</label>
+  <input type="checkbox" name = "diarrhea" id="test10" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test10" class = "col-md-2 col-sm-3 col-xs-5"/>diarrhea</label>
+  <input type="checkbox" name = "constipation" id="test11" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test11" class = "col-md-2 col-sm-3 col-xs-5"/>constipation</label>
+  <input type="checkbox" name = "vomiting" id="test12" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test12" class = "col-md-2 col-sm-3 col-xs-5"/>vomiting</label>
+  <input type="checkbox" name = "allergy" id="test13" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test13" class = "col-md-2 col-sm-3 col-xs-5"/>allergy</label>
+  <input type="checkbox" name = "skin rashes" id="test14" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test14" class = "col-md-2 col-sm-3 col-xs-5"/>skin rashes</label>
+  <input type="checkbox" name = "fever" id="test15" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test15" class = "col-md-2 col-sm-3 col-xs-5"/>fever</label>
+  <input type="checkbox" name = "insomnia" id="test16" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test16" class = "col-md-2 col-sm-3 col-xs-5"/>insomnia</label>
+  <input type="checkbox" name = "hypertension" id="test17" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test17" class = "col-md-2 col-sm-3 col-xs-5"/>hypertension</label>
+  <input type="checkbox" name = "cough" id="test18" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test18" class = "col-md-2 col-sm-3 col-xs-5"/>cough</label>
+  <input type="checkbox" name = "joint pain" id="test19" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test19" class = "col-md-2 col-sm-3 col-xs-5"/>joint pain</label>
+  <input type="checkbox" name = "weight loss" id="test20" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test20" class = "col-md-2 col-sm-3 col-xs-5"/>weight loss</label>
+  <input type="checkbox" name = "weight gain" id="test21" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test21" class = "col-md-2 col-sm-3 col-xs-5"/>weight gain</label>
+  <input type="checkbox" name = "irritaion in eyes" id="test22" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test22" class = "col-md-2 col-sm-3 col-xs-5"/>irritaion in eyes</label>
+  <input type="checkbox" name = "hypotension" id="test23" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test23" class = "col-md-2 col-sm-3 col-xs-5"/>hypotension</label>
+  <input type="checkbox" name = "hair loss" id="test24" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test24" class = "col-md-2 col-sm-3 col-xs-5"/>hair loss</label>
+  <input type="checkbox" name = "stress" id="test25" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test25" class = "col-md-2 col-sm-3 col-xs-5"/>stress</label>
+  <br><br><br><input type = "submit" class = "col-md-4 col-sm-6 col-xs-8" style = "color: white; border: none; border-radius: 5px; padding: 10px; background: #1abc9c; margin-bottom: 10px;"/>
+</form>
 </div>
 
 <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>

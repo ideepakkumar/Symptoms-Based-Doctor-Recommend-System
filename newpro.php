@@ -137,13 +137,10 @@ if(!$res){
       <div class = "profile-name"><?php echo $res[0]["Doctor Name"]; ?></div>
       <hr class = "bar">
       <div class = "profile-designation"><?php echo $res[0]["Specialist"]; ?></div>
-      <div class = "utility-icons"><i class = "fa fa-upload"></i><i class = "fa fa-flag"></i><i class = "fa fa-eye"></i></div>
+      <!-- <div class = "utility-icons"><i class = "fa fa-upload"></i><i class = "fa fa-flag"></i><i class = "fa fa-eye"></i></div> -->
       <hr class = "bar">
-      <center><button style = "    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    background: #1abc9c; margin-bottom: 10px;">Book An Appointment</button></center>
+      <center><button style = "color: white; border: none; border-radius: 5px; width: 80%; padding: 10px; background: #1abc9c; margin-bottom: 10px;">Book An Appointment</button></center>
+      <center><button style = "color: white; border: none; border-radius: 5px; width: 80%; padding: 10px; background: #1abc9c; margin-bottom: 10px;">Review This Doctor</button></center>
     </div>
     <div class = "col-md-9 col-sm-8 col-xs-12">
       <div style = "width: 91%; margin-left: 2%; margin-right: 7%; border-top: 5px solid #1abc9c;">
@@ -168,16 +165,16 @@ if(!$res){
 
               $res = $db->resultset("SELECT descr_title, descr_content, date_of_entry FROM appointments WHERE doc_id = :doc_id", array(':doc_id' => $doc_id));
               $i = 0;
-
-              foreach($res as $each){
-                echo '<div class = "profile-info" style = "background: #fbfbfb; margin-bottom: 5px;"><div class = "col-md-12" style = "text-align: center; border-right: 2px solid #ecf0f1; padding: 15px;">
-                  <h5><i class = "fa fa-ambulance"></i>&nbsp;&nbsp;'.$each['descr_title'].'</h5>
-                  <small>'.$each['descr_content'].'</small>
-                  <p style = "text-align: right; font-size: 75%">'.$each['data_of_entry'].'</p>
-                </div></div>';
-                $i = $i + 1;
-              }
-
+              if($res){
+                foreach($res as $each){
+                  echo '<div class = "profile-info" style = "background: #fbfbfb; margin-bottom: 5px;"><div class = "col-md-12" style = "text-align: center; border-right: 2px solid #ecf0f1; padding: 15px;">
+                    <h5><i class = "fa fa-ambulance"></i>&nbsp;&nbsp;'.$each['descr_title'].'</h5>
+                    <small>'.$each['descr_content'].'</small>
+                    <p style = "text-align: right; font-size: 75%">'.$each['data_of_entry'].'</p>
+                  </div></div>';
+                  $i = $i + 1;
+                }
+              }      
               if($i == 0) echo "<div class = 'profile-info' style = 'background: #fbfbfb;'><small><i class = 'fa fa-ambulance'></i>&nbsp;&nbsp;No review is available for this doctor.</small></div>";
               ?>
       </div>
