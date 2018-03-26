@@ -364,7 +364,7 @@ h3 {
     },
     function(data, status){
         if(status == "success"){
-          //console.log(data);
+          // console.log(data);
           var res = ""; data = JSON.parse(data);
           for(var i = 0; i < data.length; i += 1){
              res += "<li><a class = 'result-option' href = './newpro.php?q=" + data[i]["id"] + "'>" + data[i]["Doctor Name"] + "</a></li>";
