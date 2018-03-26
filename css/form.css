@@ -1,0 +1,230 @@
+
+    /* centered columns styles */
+    .row-centered {
+        text-align:center;
+    }
+    .col-centered {
+        display:inline-block;
+        float:none;
+        /* reset the text-align */
+        text-align:left;
+        /* inline-block space fix */
+        margin-right:-4px;
+    }
+
+    .input-bottom-bordered{
+      border: none;
+      border-bottom: 1px solid black;
+      background: none;
+      padding: 5px;
+      margin-top: 35px;
+      height: 50px;
+    }
+    /*input[type="text"]:focus::-webkit-input-placeholder {
+      color: white;
+    }*/
+
+    #login-form{
+    height: 132px;
+    width: 270px;
+    padding: 15px;
+    }
+    .sign-in-btn{
+      margin-top: 15px;
+    }
+    .sign-in-btn{
+      cursor: pointer;
+      height: 36px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 0 2px gray;
+      line-height: 36px;
+      font-size: 13px;
+      color: white;
+    }
+    .login-btn-icon{
+      height: 34px;
+      width: 34px;
+      background: white;
+      float: left;
+      margin: 1px;
+      padding: 4px;
+      box-sizing: border-box;
+     }
+     .btn-text{
+       font-family: Roboto,arial,sans-serif;
+       width: calc(100% - 40px);
+       text-align: center;
+     }
+     #fb-sign-in{
+        background: #3b5998;
+     }
+     #google-sign-in{
+       background: #4285f4;
+     }
+     /*.sign-in-overall, .sign-up-overall{
+       background: #00efaf;
+       height: 40px;
+       color: white;
+       border: 2px solid white;
+       line-height: 36px;
+     }
+     .sign-in-overall:focus, .sign-up-overall:focus{
+       outline: 0;
+     }
+     .sign-up-overall{
+       background: #ef00c5;
+     }
+     .my-active{
+       opacity: 1;
+       box-shadow: 0 0 1px gray;
+     }
+     .my-disabled{
+       opacity: 0.6;
+       box-shadow: none;
+     }*/
+
+     #contact {
+       margin-top: 40px;
+       padding-right: 0 !important;
+       padding-left: 20px !important;
+     }
+
+     #contact .slider-masks {
+       background-color: rgba(129, 129, 129, 0.7);
+       height: 100%;
+       left: 0;
+       position: absolute;
+       top: 0;
+       width: 100%;
+     }
+     #contact .group {
+       position: relative;
+       margin-bottom: 30px;
+       min-width: 100%;
+     }
+     .group input,
+     .group textarea {
+       font-size: 13px;
+       padding: 10px 10px 10px 5px;
+       display: block;
+       width: 100%;
+       border: none;
+       border-bottom: 1px solid #2b2b2b;
+       background: transparent;
+       color: #969696;
+       font-size: 13px;
+     }
+     .group input:focus,
+     .group textarea:focus {
+       outline: none;
+       border-bottom: none;
+     }
+    .group label {
+       color: #2b2b2b;
+       font-size: 14px;
+       font-weight: normal;
+       position: absolute;
+       pointer-events: none;
+       left: 5px;
+       top: 10px;
+       transition: 0.2s ease all;
+       -moz-transition: 0.2s ease all;
+       -webkit-transition: 0.2s ease all;
+     }
+     .group input:focus ~ label,
+    .group input:valid ~ label,
+     .group textarea:focus ~ label,
+     .group textarea:valid ~ label {
+       top: -25px;
+       font-size: 12px;
+       color: #818181;
+     }
+     #contact .bar {
+       position: relative;
+       display: block;
+       width: 100%;
+     }
+     #contact .bar:before,
+     #contact .bar:after {
+       content: '';
+       height: 2px;
+       width: 0;
+       bottom: 1px;
+       position: absolute;
+       background: #818181;
+       transition: 0.2s ease all;
+       -moz-transition: 0.2s ease all;
+       -webkit-transition: 0.2s ease all;
+     }
+     #contact .bar:before {
+       left: 50%;
+     }
+     #contact .bar:after {
+       right: 50%;
+     }
+     .group input:focus ~ .bar:before,
+     .group input:focus ~ .bar:after,
+     .group textarea:focus ~ .bar:after,
+     .group textarea:focus ~ .bar:before {
+       width: 50%;
+     }
+     .group .highlight {
+       position: absolute;
+       height: 60%;
+       width: 100%;
+       top: 25%;
+       left: 0;
+       pointer-events: none;
+       opacity: 0.5;
+     }
+     .group input:focus ~ .highlight,
+     .group textarea:focus ~ .highlight {
+       -webkit-animation: inputHighlighter 0.3s ease;
+       -moz-animation: inputHighlighter 0.3s ease;
+       animation: inputHighlighter 0.3s ease;
+     }
+     #contact input[type=submit] {
+       border: 1px solid #2b2b2b !important;
+       color: #2b2b2b;
+       padding: 10px;
+       font-weight: 700;
+       letter-spacing: 0.9px;
+       text-transform: uppercase;
+       transition: 0.2s ease all;
+       -moz-transition: 0.2s ease all;
+       -webkit-transition: 0.2s ease all;
+       margin-top: 25px;
+       margin-bottom: 15px;
+     }
+     #contact input[type=submit]:hover {
+       background: #2b2b2b;
+       color: #ffffff;
+     }
+     @-webkit-keyframes inputHighlighter {
+       from {
+         background: #5264AE;
+       }
+       to {
+         width: 0;
+         background: transparent;
+       }
+     }
+     @-moz-keyframes inputHighlighter {
+       from {
+         background: #818181;
+       }
+       to {
+         width: 0;
+         background: transparent;
+       }
+     }
+     @keyframes inputHighlighter {
+       from {
+         background: #818181;
+       }
+       to {
+         width: 0;
+         background: transparent;
+       }
+     }

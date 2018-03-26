@@ -2,6 +2,7 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
   background-color: white;
@@ -67,9 +68,9 @@ h3 {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 368px;
+  /* width: 368px; */
   height: 40px;
-  float: right;
+  /* float: right; */
   background-color: transparent;
   border: 0px;
   padding: 10px;
@@ -117,7 +118,8 @@ h3 {
   padding: 0;
   position: absolute;
   z-index: 999;
-  width: 368px;
+  /* width: 368px; */
+  width: 80%;
   max-height: 200px;
   overflow: scroll;
   top: 40px;
@@ -222,7 +224,7 @@ h3 {
 <center><button class = "loc-btn col-md-4" id = "gps-loc-btn">Search using GPS location</button><br/><button class = "loc-btn col-md-4" id = "man-loc-btn">Manually select location</button></center>
 <p id = "error"></p>
 <div id = "main-content-A">
-  <div class="search-container col-md-6 col-sm-8 col-xs-12">
+  <div class="search-container col-md-6 col-sm-10 col-xs-12">
     <div class="search-box">
       <div class="search-icon"><i class="fa fa-search"></i></div>
       <input class="search-input" id="search" type="text" placeholder="Search by name">
@@ -233,8 +235,8 @@ h3 {
 
 <div id = "main-content-B" style = "display: none;">
 
-  <input type = "text" id = "course_latitude"/>
-  <input type = "text" id = "course_longitude"/>
+  <!-- <input type = "text" id = "course_latitude"/>
+  <input type = "text" id = "course_longitude"/> -->
   <center><div id="google_map" class = "col-md-8 col-sm-10 col-xs-12" style="height:400px;"></div></center>
 
 </div>
@@ -242,8 +244,8 @@ h3 {
 <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>
 <script type="text/javascript">
 
-  var LATITUDE_ELEMENT_ID = "course_latitude";
-  var LONGITUDE_ELEMENT_ID = "course_longitude";
+  // var LATITUDE_ELEMENT_ID = "course_latitude";
+  // var LONGITUDE_ELEMENT_ID = "course_longitude";
   var MAP_DIV_ELEMENT_ID = "google_map";
 
   var DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS = 1;
@@ -269,19 +271,19 @@ h3 {
 
     map.setMapType(G_NORMAL_MAP);
 
-    var latitude = +document.getElementById(LATITUDE_ELEMENT_ID).value;
-    var longitude = +document.getElementById(LONGITUDE_ELEMENT_ID).value;
+    // var latitude = +document.getElementById(LATITUDE_ELEMENT_ID).value;
+    // var longitude = +document.getElementById(LONGITUDE_ELEMENT_ID).value;
 
-    if(latitude != 0 && longitude != 0) {
-      //We have some sort of starting position, set map center and marker
-      map.setCenter(new google.maps.LatLng(latitude, longitude), DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS);
-      var point = new GLatLng(latitude, longitude);
-      marker = new GMarker(point, {draggable:false});
-      map.addOverlay(marker);
-    } else {
+    // if(latitude != 0 && longitude != 0) {
+    //   //We have some sort of starting position, set map center and marker
+    //   map.setCenter(new google.maps.LatLng(latitude, longitude), DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS);
+    //   var point = new GLatLng(latitude, longitude);
+    //   marker = new GMarker(point, {draggable:false});
+    //   map.addOverlay(marker);
+    // } else {
       // Just set the default center, do not add a marker
       map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
-    }
+    // }
 
     GEvent.addListener(map, "click", googleMapClickHandler);
   }
@@ -301,8 +303,9 @@ h3 {
       marker.setLatLng(latlng);
     }
 
-    var url = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
-    window.location.href = url;
+    // document.getElementById(LATITUDE_ELEMENT_ID).value = latlng.lat();
+    // document.getElementById(LONGITUDE_ELEMENT_ID).value = latlng.lng();
+    window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
 
   }
 
@@ -325,11 +328,11 @@ h3 {
   });
   $(".se-btn").click(function(){
     $(".se-btn").removeClass("act-btn");
-    $(this).addClass("act-btn");
+    $(this).addClass("act-btn"); $(".loc-btn").fadeOut();
   });
 
   $("#loct-drop").click(function(){
-    $(".loc-btn").fadeToggle();
+    $(".loc-btn").fadeIn();
   });
   function showPosition(position){
     var url = "./showMap.php?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
