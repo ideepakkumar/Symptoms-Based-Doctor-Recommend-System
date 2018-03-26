@@ -1,5 +1,8 @@
 <html lang="en" class="">
-<head>
+<head><script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 <style>
 body {
   background-color: white;
@@ -17,6 +20,10 @@ h1 {
 h2, a {
   font-size: 0.8em;
   color: #9BC788;
+}
+a.result-option{
+  color: white;
+  text-decoration: none;
 }
 
 h3 {
@@ -187,6 +194,13 @@ h3 {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <h1>DocRec</h1>
 <h2>Search a doctor</h2>
+<button class = "active">Search by name</button><button>Search by location</button><button>Get a symtom-based recommendation</button>
+<div id = "loc-opt">
+  <input type = "checkbox" value = "Delhi"/><label>Delhi</label>
+  <input type = "checkbox" value = "Chandigarh"/><label>Chandigarh</label>
+  <input type = "checkbox" value = "Mohali"/><label>Mohali</label>
+  <input type = "checkbox" value = "Jaipur"/><label>Jaipur</label>
+</div>
 <div class="search-container">
   <div class="search-box">
     <div class="search-icon"><i class="fa fa-search"></i></div>
@@ -194,41 +208,37 @@ h3 {
     <ul class="search-results" id="results"><!--<li>Bessie</li><li>Flossie</li>--></ul>
   </div>
 </div>
-<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
 <script>(function() {
-  var displayResults, findAll, maxResults, names, resultsOutput, searchInput;
+  var  resultsOutput, searchInput;
 
-  names = ["Gentry", "Brandi", "Maryann", "Tina", "Harper", "Hayes", "Tamera", "Shauna", "Mcfarland", "Charles", "Ortiz", "Maynard", "Julie", "Gay", "Wiggins", "Navarro", "Hopkins", "Candace", "Tammi", "Horton", "Erna", "Mills", "Opal", "Wolfe", "Walter", "Bonita", "Eleanor", "Rojas", "Ochoa", "Kirk", "Rosario", "Ball", "Lucile", "Kayla", "Carmela", "Miranda", "Middleton", "Lillie", "Sherry", "Jacqueline", "Deirdre", "Mueller", "Debra", "Jodi", "Joyce", "Estrada", "Liz", "Justine", "Francis", "Benton", "Henrietta", "Elise", "Lang", "Morse", "Farrell", "Tamra", "Darla", "Amy", "Kristie", "Wyatt", "Mcbride", "Talley", "Fay", "Sweet", "Fern", "Mcintosh", "Clemons", "Travis", "Kirsten", "Rios", "Newman", "Cook", "Jocelyn", "Mcmillan", "Mona", "Bessie", "Francis", "Rosemary", "Beverly", "Chandra", "Luella", "Parrish", "Ronda", "Earlene", "Bright", "Guthrie", "Shana", "Theresa", "Wells", "Green", "Schroeder", "Russo", "Randolph", "Livingston", "Carroll", "Velasquez", "Dana", "Bridget", "Hines", "Martha", "Marci", "Fuentes", "Stuart", "Glass", "Alejandra", "Thornton", "Britt", "Jeri", "Leach", "Cleo", "Lela", "Mattie", "Bonnie", "Lucille", "Mamie", "Kelly", "Obrien", "Carol", "Murphy", "Isabella", "Lowery", "Odom", "Norris", "Mullins", "Florine", "Morales", "Frederick", "Reynolds", "Janine", "Joyce", "Dean", "Marcy", "Allison", "Rena", "Saundra", "Flossie", "Kristi", "Monica", "Molina", "Guzman", "Loretta", "Levine", "Oneill", "Mccray", "Mann", "Constance", "English", "Eula", "Butler", "Erika"];
-
-  // Match words in a collection
-  findAll = (wordList, collection) => {
-    return collection.filter(function(word) {
-      word = word.toLowerCase();
-      return wordList.some(function(w) {
-        return ~word.indexOf(w);
-      });
-    });
-  };
-
-  // Displays results in a list
-  displayResults = function(resultsEl, wordList) {
-    return resultsEl.innerHTML = (wordList.map(function(w) {
-      return '<li>' + w + '</li>';
-    })).join('');
-  };
-
-  // Handle keyboard events
   searchInput = document.getElementById('search');
 
   resultsOutput = document.getElementById('results');
 
-  maxResults = 7;
-
   searchInput.addEventListener('keyup', (e) => {
     var suggested, value;
+    var values = ["", "", ""];
     value = searchInput.value.toLowerCase().split(' ');
-    suggested = (value[0].length ? findAll(value, names) : []);
-    return displayResults(resultsOutput, suggested);
+
+    for(var i = 0; i < value.length; i += 1) values[i] = value[i];
+
+    $.post("handle_search.php",
+    {
+        first: values[0],
+        second: values[1],
+        third: values[2]
+    },
+    function(data, status){
+        if(status == "success"){
+          var res = ""; data = JSON.parse(data);
+          for(var i = 0; i < data.length; i += 1){
+             res += "<li><a class = 'result-option' href = './newpro.php?q=" + data[i]["id"] + "'>" + data[i]["Doctor Name"] + "</a></li>";
+             //console.log(data[i]);
+          }
+          resultsOutput.innerHTML = res;
+        }else console.log("Error");
+    });
+
   });
 
 }).call(this);
