@@ -1,8 +1,6 @@
 <html lang="en" class="">
-<head><script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <style>
 body {
@@ -206,10 +204,7 @@ h3 {
   color: #3a3737;
   text-transform: uppercase;
   font-size: 75%;
-  visibility: hidden;
-}
-.act-loc-btn{
-  visibility: visible;
+  display: none;
 }
 </style>
 
@@ -218,57 +213,135 @@ h3 {
 <body>
 
 
-  <!-- <button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-
-<script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-}
-</script> -->
-
-
-
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <h1>DocRec</h1>
 <h2>Search a doctor</h2>
-<button class = "se-btn col-md-4 col-xs-12 act-btn">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12">Get a symtom-based recommendation</button>
-<center><button class = "loc-btn col-md-4">Search using GPS location</button><br/><button class = "loc-btn col-md-4">Manually select location</button></center>
-
-<div class="search-container col-md-6 col-sm-8 col-xs-12">
-  <div class="search-box">
-    <div class="search-icon"><i class="fa fa-search"></i></div>
-    <input class="search-input" id="search" type="text" placeholder="Search by name">
-    <ul class="search-results" id="results"><!--<li>Bessie</li><li>Flossie</li>--></ul>
+<button class = "se-btn col-md-4 col-xs-12 act-btn" id = "search-name">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12">Get a symtom-based recommendation</button>
+<center><button class = "loc-btn col-md-4" id = "gps-loc-btn">Search using GPS location</button><br/><button class = "loc-btn col-md-4" id = "man-loc-btn">Manually select location</button></center>
+<p id = "error"></p>
+<div id = "main-content-A">
+  <div class="search-container col-md-6 col-sm-8 col-xs-12">
+    <div class="search-box">
+      <div class="search-icon"><i class="fa fa-search"></i></div>
+      <input class="search-input" id="search" type="text" placeholder="Search by name">
+      <ul class="search-results" id="results"><!--<li>Bessie</li><li>Flossie</li>--></ul>
+    </div>
   </div>
 </div>
+
+<div id = "main-content-B" style = "display: none;">
+
+  <input type = "text" id = "course_latitude"/>
+  <input type = "text" id = "course_longitude"/>
+  <center><div id="google_map" class = "col-md-8 col-sm-10 col-xs-12" style="height:400px;"></div></center>
+
+</div>
+
+<script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>
+<script type="text/javascript">
+
+  var LATITUDE_ELEMENT_ID = "course_latitude";
+  var LONGITUDE_ELEMENT_ID = "course_longitude";
+  var MAP_DIV_ELEMENT_ID = "google_map";
+
+  var DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS = 1;
+  var DEFAULT_CENTER_LATITUDE = 22;
+  var DEFAULT_CENTER_LONGITUDE = 13;
+  var DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS = 15;
+
+  // This is the zoom level required to position the marker
+  var REQUIRED_ZOOM = 15;
+
+  google.load("maps", "2.x");
+
+  // The google map variable
+  var map = null;
+
+  // The marker variable, when it is null no marker has been added
+  var marker = null;
+
+  function initializeGoogleMap() {
+    map = new google.maps.Map2(document.getElementById(MAP_DIV_ELEMENT_ID));
+    map.addControl(new GLargeMapControl());
+    map.addControl(new GMapTypeControl());
+
+    map.setMapType(G_NORMAL_MAP);
+
+    var latitude = +document.getElementById(LATITUDE_ELEMENT_ID).value;
+    var longitude = +document.getElementById(LONGITUDE_ELEMENT_ID).value;
+
+    if(latitude != 0 && longitude != 0) {
+      //We have some sort of starting position, set map center and marker
+      map.setCenter(new google.maps.LatLng(latitude, longitude), DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS);
+      var point = new GLatLng(latitude, longitude);
+      marker = new GMarker(point, {draggable:false});
+      map.addOverlay(marker);
+    } else {
+      // Just set the default center, do not add a marker
+      map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
+    }
+
+    GEvent.addListener(map, "click", googleMapClickHandler);
+  }
+
+
+  function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+
+    if(map.getZoom() < REQUIRED_ZOOM) {
+      alert("<%= :you_must_zoom_in_closer_to_position_the_course_accurately.l %>" );
+      return;
+    }
+    if(marker == null) {
+      marker = new GMarker(latlng, {draggable:false});
+      map.addOverlay(marker);
+    }
+    else {
+      marker.setLatLng(latlng);
+    }
+
+    var url = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
+    window.location.href = url;
+
+  }
+
+  google.setOnLoadCallback(initializeGoogleMap);
+
+
+</script>
+
 
 <script>(function() {
   var  resultsOutput, searchInput;
 
+  $("#man-loc-btn").click(function(){
+    $("#main-content-A").hide();
+    $("#main-content-B").show();
+  });
+  $("#search-name").click(function(){
+    $("#main-content-B").hide();
+    $("#main-content-A").show();
+  });
   $(".se-btn").click(function(){
     $(".se-btn").removeClass("act-btn");
     $(this).addClass("act-btn");
   });
 
   $("#loct-drop").click(function(){
-    $(".loc-btn").toggleClass("act-loc-btn");
+    $(".loc-btn").fadeToggle();
   });
-
+  function showPosition(position){
+    var url = "./showMap.php?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+    window.location.href = url;
+  }
+  $("#gps-loc-btn").click(function(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        $("#error").text("Geolocation is not supported by this browser.");
+    }
+  });
   searchInput = document.getElementById('search');
 
   resultsOutput = document.getElementById('results');
