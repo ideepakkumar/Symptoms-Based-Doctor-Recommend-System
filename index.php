@@ -276,6 +276,9 @@ label:hover:before {
 #main-content-C label{
   text-align: left;
 }
+#main-content-C{
+  display: none;
+}
 </style>
 
 </head>
@@ -288,7 +291,7 @@ label:hover:before {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <h1>DocRec</h1>
 <h2>Search a doctor</h2>
-<button class = "se-btn col-md-4 col-xs-12 act-btn" id = "search-name">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12">Get a symtom-based recommendation</button>
+<button class = "se-btn col-md-4 col-xs-12 act-btn" id = "search-name">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12" id = "rec-btn">Get a symtom-based recommendation</button>
 <center><button class = "loc-btn col-md-4" id = "gps-loc-btn">Search using GPS location</button><br/><button class = "loc-btn col-md-4" id = "man-loc-btn">Manually select location</button></center>
 <p id = "error"></p>
 <div id = "main-content-A">
@@ -306,6 +309,7 @@ label:hover:before {
 </div>
 
 <div id = "main-content-C">
+  <p>Please select all the symptoms you have.</p>
   <input type="checkbox" id="test1" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test1" class = "col-md-2 col-sm-3 col-xs-5"/>muscle pain</label>
   <input type="checkbox" id="test2" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test2" class = "col-md-2 col-sm-3 col-xs-5"/>chest pain</label>
   <input type="checkbox" id="test3" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test3" class = "col-md-2 col-sm-3 col-xs-5"/>headache</label>
@@ -407,11 +411,18 @@ var MAP_DIV_ELEMENT_ID = "google_map";
 
   $("#man-loc-btn").click(function(){
     $("#main-content-A").hide();
+    $("#main-content-C").hide();
     $("#main-content-B").show();
   });
   $("#search-name").click(function(){
     $("#main-content-B").hide();
+    $("#main-content-C").hide();
     $("#main-content-A").show();
+  });
+  $("#rec-btn").click(function(){
+    $("#main-content-B").hide();
+    $("#main-content-A").hide();
+    $("#main-content-C").show();
   });
   $(".se-btn").click(function(){
     $(".se-btn").removeClass("act-btn");
