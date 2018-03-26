@@ -2,7 +2,11 @@
 <?php
 require './pdo/classes/Database.php';
 $db = new Database;
-session_start();
+$doc_id = $_GET["q"];
+$res = $db->resultset("SELECT * FROM docsinfo WHERE ID = ".$doc_id);
+if(!$res){
+  header("Location: ./index.php");
+}
 
 ?>
 
@@ -127,21 +131,21 @@ session_start();
     <div class = "col-md-3 col-sm-4 col-xs-12" >
       <div class = "social-icons" style= "background: #16a085;"><i class = "fa fa-facebook"></i><i class = "fa fa-google-plus"></i><i class = "fa fa-twitter"></i></div>
       <div class = "profile-pic-container" style = ""><img src = "https://lh6.googleusercontent.com/-ZQnzMVcsF80/AAAAAAAAAAI/AAAAAAAAAIM/tF0uN5Kjek0/s96-c/photo.jpg"></div>
-      <div class = "profile-name">SHIVAM<br>KUMAR</div>
+      <div class = "profile-name"><?php echo $res[0]["Doctor Name"]; ?></div>
       <hr class = "bar">
-      <div class = "profile-designation">Neurologist</div>
+      <div class = "profile-designation"><?php echo $res[0]["Specialist"]; ?></div>
       <div class = "utility-icons"><i class = "fa fa-upload"></i><i class = "fa fa-flag"></i><i class = "fa fa-eye"></i></div>
       <hr class = "bar">
     </div>
     <div class = "col-md-9 col-sm-8 col-xs-12">
       <div style = "width: 91%; margin-left: 2%; margin-right: 7%; border-top: 5px solid #1abc9c;">
-          <div style = "min-width: 100%; padding-top: 15px; padding-bottom: 15px;"><a href = "#" class = "prolink">Profile</a><a href = "#" class = "prolink">Videos</a><a href = "#" class = "prolink">Blog</a><a href = "#" class = "prolink">Contact</a></div>
+          <div style = "min-width: 100%; padding-top: 15px; padding-bottom: 15px;"><a href = "#" class = "prolink">Profile</a><a href = "#" class = "prolink">Reviews</a><a href = "#" class = "prolink">Contact</a></div>
           <div style = "text-align: right; font-size: 130%; letter-spacing: 2px;">PROFILE</span>&nbsp;&nbsp;<i class = "fa fa-user-circle" aria-hidden = "true"></i></div>
           <div class = "profile-info container" style = "background: #fbfbfb;">
             <div class = "row">
               <div class = "col-md-6 col-xs-12" style = "text-align: center; border-right: 2px solid #ecf0f1; padding: 15px;">
                 <h5><i class = "fa fa-user-circle"></i>&nbsp;&nbsp;Basic Information</h5>
-                <small>Shivam Kumar<br>M.Sc - Anatomy<br>Genereal Physician<br>12 years experience<br></small>
+                <small><?php echo $res[0]["Doctor Name"]; ?><br><?php echo $res[0]["Degree"]; ?><br><?php echo $res[0]["Specialist"]; ?><br><?php echo $res[0]["Experience"]; ?><br></small>
               </div>
               <div class = "col-md-6 col-xs-12" style = "text-align: center; border-left: 2px solid #ecf0f1; padding: 10px;">
                 <h5><i class = "fa fa-info-circle"></i>&nbsp;&nbsp;Profile Statement</h5>
@@ -149,25 +153,24 @@ session_start();
               </div>
             </div>
           </div>
-          <div style = "text-align: right; font-size: 130%; letter-spacing: 2px;">VIDEOS</span>&nbsp;&nbsp;<i class = "fa fa-image" aria-hidden = "true"></i></div>
-          <div class = "profile-info" style = "background: #fbfbfb;">Videos: dsjghjxksl</div>
-          <div style = "text-align: right; font-size: 130%; letter-spacing: 2px;">BLOG</span>&nbsp;&nbsp;<i class = "fa fa-comment" aria-hidden = "true"></i></div>
+
+          <div style = "text-align: right; font-size: 130%; letter-spacing: 2px;">REVIEWS</span>&nbsp;&nbsp;<i class = "fa fa-comment" aria-hidden = "true"></i></div>
             <?php
 
 
-              $res = $db->resultset("SELECT * FROM blog WHERE user_id = :user_id", array(':user_id' => $_SESSION['data']['id']));
-              //print_r($res);
+              $res = $db->resultset("SELECT descr_title, descr_content, date_of_entry FROM appointments WHERE doc_id = :doc_id", array(':doc_id' => $doc_id));
               $i = 0;
 
               foreach($res as $each){
                 echo '<div class = "profile-info" style = "background: #fbfbfb; margin-bottom: 5px;"><div class = "col-md-12" style = "text-align: center; border-right: 2px solid #ecf0f1; padding: 15px;">
-                  <h5><i class = "fa fa-ambulance"></i>&nbsp;&nbsp;'.$each['title'].'</h5>
-                  <small>'.$each['body'].'</small>
+                  <h5><i class = "fa fa-ambulance"></i>&nbsp;&nbsp;'.$each['descr_title'].'</h5>
+                  <small>'.$each['descr_content'].'</small>
+                  <p style = "text-align: right; font-size: 75%">'.$each['data_of_entry'].'</p>
                 </div></div>';
                 $i = $i + 1;
               }
 
-              if($i == 0) echo "<div class = 'profile-info' style = 'background: #fbfbfb;'><small><i class = 'fa fa-ambulance'></i>&nbsp;&nbsp;Please write something.</small></div>";
+              if($i == 0) echo "<div class = 'profile-info' style = 'background: #fbfbfb;'><small><i class = 'fa fa-ambulance'></i>&nbsp;&nbsp;No review is available for this doctor.</small></div>";
               ?>
       </div>
 
