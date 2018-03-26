@@ -187,6 +187,10 @@ h3 {
       font-size: 75%;
       opacity: 0.5;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
 .act-btn{
   opacity: 1;
 }
@@ -197,6 +201,85 @@ h3 {
   color: #3a3737;
   text-transform: uppercase;
   font-size: 75%;
+  display: none;
+}
+
+/*Checkboxes */
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1.5em; height: 1.5em;
+  border: 2px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: .2em; left: .275em;
+  font-size: 1.4em;
+  line-height: 0.8;
+  color: #09ad7e;
+  transition: all .2s;
+  font-family: Helvetica, Arial, sans-serif;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 2px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 2px solid #4778d9!important;
+}
+
+#main-content-C label{
+  text-align: left;
+}
+#main-content-C{
   display: none;
 }
 </style>
@@ -211,7 +294,7 @@ h3 {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <h1>DocRec</h1>
 <h2>Search a doctor</h2>
-<button class = "se-btn col-md-4 col-xs-12 act-btn" id = "search-name">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12">Get a symtom-based recommendation</button>
+<button class = "se-btn col-md-4 col-xs-12 act-btn" id = "search-name">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12" id = "rec-btn">Get a symtom-based recommendation</button>
 <center><button class = "loc-btn col-md-4" id = "gps-loc-btn">Search using GPS location</button><br/><button class = "loc-btn col-md-4" id = "man-loc-btn">Manually select location</button></center>
 <p id = "error"></p>
 <div id = "main-content-A">
@@ -225,22 +308,58 @@ h3 {
 </div>
 
 <div id = "main-content-B" style = "display: none;">
-
-  <!-- <input type = "text" id = "course_latitude"/>
-  <input type = "text" id = "course_longitude"/> -->
   <center><div id="google_map" class = "col-md-8 col-sm-10 col-xs-12" style="height:400px;"></div></center>
+</div>
+
+<div id = "main-content-C">
+  <p>Please select all the symptoms you have.</p>
+  <input type="checkbox" id="test1" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test1" class = "col-md-2 col-sm-3 col-xs-5"/>muscle pain</label>
+  <input type="checkbox" id="test2" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test2" class = "col-md-2 col-sm-3 col-xs-5"/>chest pain</label>
+  <input type="checkbox" id="test3" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test3" class = "col-md-2 col-sm-3 col-xs-5"/>headache</label>
+  <input type="checkbox" id="test4" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test4" class = "col-md-2 col-sm-3 col-xs-5"/>abdominal pain</label>
+  <input type="checkbox" id="test5" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test5" class = "col-md-2 col-sm-3 col-xs-5"/>fatigue</label>
+  <input type="checkbox" id="test6" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test6" class = "col-md-2 col-sm-3 col-xs-5"/>nausea</label>
+  <input type="checkbox" id="test7" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test7" class = "col-md-2 col-sm-3 col-xs-5"/>anxiety</label>
+  <input type="checkbox" id="test8" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test8" class = "col-md-2 col-sm-3 col-xs-5"/>common cold</label>
+  <input type="checkbox" id="test9" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test9" class = "col-md-2 col-sm-3 col-xs-5"/>dizziness</label>
+  <input type="checkbox" id="test10" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test10" class = "col-md-2 col-sm-3 col-xs-5"/>diarrhea</label>
+  <input type="checkbox" id="test11" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test11" class = "col-md-2 col-sm-3 col-xs-5"/>constipation</label>
+  <input type="checkbox" id="test12" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test12" class = "col-md-2 col-sm-3 col-xs-5"/>vomiting</label>
+  <input type="checkbox" id="test13" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test13" class = "col-md-2 col-sm-3 col-xs-5"/>allergy</label>
+  <input type="checkbox" id="test14" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test14" class = "col-md-2 col-sm-3 col-xs-5"/>skin rashes</label>
+  <input type="checkbox" id="test15" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test15" class = "col-md-2 col-sm-3 col-xs-5"/>fever</label>
+  <input type="checkbox" id="test16" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test16" class = "col-md-2 col-sm-3 col-xs-5"/>insomnia</label>
+  <input type="checkbox" id="test17" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test17" class = "col-md-2 col-sm-3 col-xs-5"/>hypertension</label>
+  <input type="checkbox" id="test18" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test18" class = "col-md-2 col-sm-3 col-xs-5"/>cough</label>
+  <input type="checkbox" id="test19" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test19" class = "col-md-2 col-sm-3 col-xs-5"/>joint pain</label>
+  <input type="checkbox" id="test20" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test20" class = "col-md-2 col-sm-3 col-xs-5"/>weight loss</label>
+  <input type="checkbox" id="test21" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test21" class = "col-md-2 col-sm-3 col-xs-5"/>weight gain</label>
+  <input type="checkbox" id="test22" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test22" class = "col-md-2 col-sm-3 col-xs-5"/>irritaion in eyes</label>
+  <input type="checkbox" id="test23" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test23" class = "col-md-2 col-sm-3 col-xs-5"/>hypotension</label>
+  <input type="checkbox" id="test24" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test24" class = "col-md-2 col-sm-3 col-xs-5"/>hair loss</label>
+  <input type="checkbox" id="test25" class = "col-md-2 col-sm-3 col-xs-5"/><label for="test25" class = "col-md-2 col-sm-3 col-xs-5"/>stress</label>
 
 </div>
 
 <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
   // var LATITUDE_ELEMENT_ID = "course_latitude";
   // var LONGITUDE_ELEMENT_ID = "course_longitude";
   var MAP_DIV_ELEMENT_ID = "google_map";
+=======
+
+var MAP_DIV_ELEMENT_ID = "google_map";
+var MAP_DIV_ELEMENT_ID = "google_map";
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   var DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS = 1;
   var DEFAULT_CENTER_LATITUDE = 22;
   var DEFAULT_CENTER_LONGITUDE = 13;
   var DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS = 15;
+<<<<<<< HEAD
+=======
+
   // This is the zoom level required to position the marker
   var REQUIRED_ZOOM = 15;
   google.load("maps", "2.x");
@@ -248,11 +367,27 @@ h3 {
   var map = null;
   // The marker variable, when it is null no marker has been added
   var marker = null;
+
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
+  // This is the zoom level required to position the marker
+  var REQUIRED_ZOOM = 15;
+  google.load("maps", "2.x");
+  // The google map variable
+  var map = null;
+  // The marker variable, when it is null no marker has been added
+  var marker = null;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   function initializeGoogleMap() {
     map = new google.maps.Map2(document.getElementById(MAP_DIV_ELEMENT_ID));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
     map.setMapType(G_NORMAL_MAP);
+<<<<<<< HEAD
     // var latitude = +document.getElementById(LATITUDE_ELEMENT_ID).value;
     // var longitude = +document.getElementById(LONGITUDE_ELEMENT_ID).value;
     // if(latitude != 0 && longitude != 0) {
@@ -268,6 +403,20 @@ h3 {
     GEvent.addListener(map, "click", googleMapClickHandler);
   }
   function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+=======
+    map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
+    GEvent.addListener(map, "click", googleMapClickHandler);
+  }
+  function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+
+
+    GEvent.addListener(map, "click", googleMapClickHandler);
+  }
+
+
+  function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
     if(map.getZoom() < REQUIRED_ZOOM) {
       alert("You need to zoom in closer to position the cursor accurately." );
       return;
@@ -279,28 +428,51 @@ h3 {
     else {
       marker.setLatLng(latlng);
     }
+<<<<<<< HEAD
     // document.getElementById(LATITUDE_ELEMENT_ID).value = latlng.lat();
     // document.getElementById(LONGITUDE_ELEMENT_ID).value = latlng.lng();
     window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
   }
   google.setOnLoadCallback(initializeGoogleMap);
+=======
+
+    window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
+  }
+  google.setOnLoadCallback(initializeGoogleMap);
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
 </script>
 
 
 <script>(function() {
   var  resultsOutput, searchInput;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   $("#man-loc-btn").click(function(){
     $("#main-content-A").hide();
+    $("#main-content-C").hide();
     $("#main-content-B").show();
   });
   $("#search-name").click(function(){
     $("#main-content-B").hide();
+    $("#main-content-C").hide();
     $("#main-content-A").show();
+  });
+  $("#rec-btn").click(function(){
+    $("#main-content-B").hide();
+    $("#main-content-A").hide();
+    $("#main-content-C").show();
   });
   $(".se-btn").click(function(){
     $(".se-btn").removeClass("act-btn");
     $(this).addClass("act-btn"); $(".loc-btn").fadeOut();
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   $("#loct-drop").click(function(){
     $(".loc-btn").fadeIn();
   });
