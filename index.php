@@ -67,7 +67,7 @@ h3 {
   border: 0px;
   padding: 10px;
   text-transform: uppercase;
-  font-family: "Roboto", Arial, sans-serif;
+  /* font-family: "Roboto", Arial, sans-serif; */
   font-size: 1em;
   position: relative;
   outline: 0px;
@@ -116,6 +116,7 @@ h3 {
   top: 40px;
   left: 32px;
   text-align: left;
+  overflow: hidden;
 }
 .search-results li {
   -webkit-box-sizing: border-box;
@@ -164,6 +165,18 @@ h3 {
   animation: fadeInTop 0.4s 0.4s forwards;
   opacity: 0;
 }
+#search::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(0, 55, 0, 0.2); text-align: center;
+}
+#search::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(0, 55, 0, 0.2); text-align: center;
+}
+#search:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(0, 55, 0, 0.2); text-align: center;
+}
+#search:-moz-placeholder { /* Firefox 18- */
+  color: rgba(0, 55, 0, 0.2); text-align: center;
+}
 </style>
 
 </head>
@@ -177,7 +190,7 @@ h3 {
 <div class="search-container">
   <div class="search-box">
     <div class="search-icon"><i class="fa fa-search"></i></div>
-    <input class="search-input" id="search" type="text" placeholder="Search people">
+    <input class="search-input" id="search" type="text" placeholder="Search by name">
     <ul class="search-results" id="results"><!--<li>Bessie</li><li>Flossie</li>--></ul>
   </div>
 </div>
