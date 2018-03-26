@@ -292,7 +292,7 @@ h3 {
   function googleMapClickHandler(overlay, latlng, overlaylatlng) {
 
     if(map.getZoom() < REQUIRED_ZOOM) {
-      alert("<%= :you_must_zoom_in_closer_to_position_the_course_accurately.l %>" );
+      alert("You need to zoom in closer to position the cursor accurately." );
       return;
     }
     if(marker == null) {
