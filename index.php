@@ -315,7 +315,7 @@ h3 {
 
 >>>>>>> 862dcc511a0ada4a02085e085262912c81a6f4c4
     if(map.getZoom() < REQUIRED_ZOOM) {
-      alert("<%= :you_must_zoom_in_closer_to_position_the_course_accurately.l %>" );
+      alert("You need to zoom in closer to position the cursor accurately." );
       return;
     }
     if(marker == null) {
@@ -397,7 +397,7 @@ h3 {
     },
     function(data, status){
         if(status == "success"){
-          //console.log(data);
+          // console.log(data);
           var res = ""; data = JSON.parse(data);
           for(var i = 0; i < data.length; i += 1){
              res += "<li><a class = 'result-option' href = './newpro.php?q=" + data[i]["id"] + "'>" + data[i]["Doctor Name"] + "</a></li>";
