@@ -84,9 +84,9 @@ if(!$res){
   }
   .profile-pic-container img{
     border: 5px solid #1abc9c;
-    height: 150px;
-    width: 150px;
-    border-radius: 75px;
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
     margin-left: auto;
   	margin-right: auto;
   	display: block;
@@ -130,12 +130,20 @@ if(!$res){
     <div class = "row">
     <div class = "col-md-3 col-sm-4 col-xs-12" >
       <div class = "social-icons" style= "background: #16a085;"><i class = "fa fa-facebook"></i><i class = "fa fa-google-plus"></i><i class = "fa fa-twitter"></i></div>
-      <div class = "profile-pic-container" style = ""><img src = "https://lh6.googleusercontent.com/-ZQnzMVcsF80/AAAAAAAAAAI/AAAAAAAAAIM/tF0uN5Kjek0/s96-c/photo.jpg"></div>
+      <div class = "profile-pic-container" style = "">
+        <!-- <img src = "https://lh6.googleusercontent.com/-ZQnzMVcsF80/AAAAAAAAAAI/AAAAAAAAAIM/tF0uN5Kjek0/s96-c/photo.jpg"> -->
+        <?php  echo '<img src="data:image/jpeg;base64,'. base64_encode($res[0]["Image"]) .'" />'; ?>
+      </div>
       <div class = "profile-name"><?php echo $res[0]["Doctor Name"]; ?></div>
       <hr class = "bar">
       <div class = "profile-designation"><?php echo $res[0]["Specialist"]; ?></div>
       <div class = "utility-icons"><i class = "fa fa-upload"></i><i class = "fa fa-flag"></i><i class = "fa fa-eye"></i></div>
       <hr class = "bar">
+      <center><button style = "    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background: #1abc9c; margin-bottom: 10px;">Book An Appointment</button></center>
     </div>
     <div class = "col-md-9 col-sm-8 col-xs-12">
       <div style = "width: 91%; margin-left: 2%; margin-right: 7%; border-top: 5px solid #1abc9c;">
