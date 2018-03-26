@@ -187,7 +187,10 @@ h3 {
       font-size: 75%;
       opacity: 0.5;
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
 .act-btn{
   opacity: 1;
 }
@@ -342,14 +345,22 @@ label:hover:before {
 
 <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyBvWlrxVhFhEovLo3EzhaM5SMPeNHwyqUI"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
+  // var LATITUDE_ELEMENT_ID = "course_latitude";
+  // var LONGITUDE_ELEMENT_ID = "course_longitude";
+  var MAP_DIV_ELEMENT_ID = "google_map";
+=======
 
 var MAP_DIV_ELEMENT_ID = "google_map";
 var MAP_DIV_ELEMENT_ID = "google_map";
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   var DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS = 1;
   var DEFAULT_CENTER_LATITUDE = 22;
   var DEFAULT_CENTER_LONGITUDE = 13;
   var DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS = 15;
+<<<<<<< HEAD
+=======
 
   // This is the zoom level required to position the marker
   var REQUIRED_ZOOM = 15;
@@ -360,23 +371,41 @@ var MAP_DIV_ELEMENT_ID = "google_map";
   var marker = null;
 
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   // This is the zoom level required to position the marker
   var REQUIRED_ZOOM = 15;
-
   google.load("maps", "2.x");
-
   // The google map variable
   var map = null;
-
   // The marker variable, when it is null no marker has been added
   var marker = null;
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   function initializeGoogleMap() {
     map = new google.maps.Map2(document.getElementById(MAP_DIV_ELEMENT_ID));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
     map.setMapType(G_NORMAL_MAP);
+<<<<<<< HEAD
+    // var latitude = +document.getElementById(LATITUDE_ELEMENT_ID).value;
+    // var longitude = +document.getElementById(LONGITUDE_ELEMENT_ID).value;
+    // if(latitude != 0 && longitude != 0) {
+    //   //We have some sort of starting position, set map center and marker
+    //   map.setCenter(new google.maps.LatLng(latitude, longitude), DEFAULT_ZOOM_WHEN_COORDINATE_EXISTS);
+    //   var point = new GLatLng(latitude, longitude);
+    //   marker = new GMarker(point, {draggable:false});
+    //   map.addOverlay(marker);
+    // } else {
+      // Just set the default center, do not add a marker
+      map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
+    // }
+    GEvent.addListener(map, "click", googleMapClickHandler);
+  }
+  function googleMapClickHandler(overlay, latlng, overlaylatlng) {
+=======
     map.setCenter(new google.maps.LatLng(DEFAULT_CENTER_LATITUDE, DEFAULT_CENTER_LONGITUDE), DEFAULT_ZOOM_WHEN_NO_COORDINATE_EXISTS);
     GEvent.addListener(map, "click", googleMapClickHandler);
   }
@@ -389,6 +418,7 @@ var MAP_DIV_ELEMENT_ID = "google_map";
 
   function googleMapClickHandler(overlay, latlng, overlaylatlng) {
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
     if(map.getZoom() < REQUIRED_ZOOM) {
       alert("You need to zoom in closer to position the cursor accurately." );
       return;
@@ -400,17 +430,28 @@ var MAP_DIV_ELEMENT_ID = "google_map";
     else {
       marker.setLatLng(latlng);
     }
+<<<<<<< HEAD
+    // document.getElementById(LATITUDE_ELEMENT_ID).value = latlng.lat();
+    // document.getElementById(LONGITUDE_ELEMENT_ID).value = latlng.lng();
+    window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
+  }
+  google.setOnLoadCallback(initializeGoogleMap);
+=======
 
     window.location.href = "./showMap.php?lat=" + latlng.lat() + "&lon=" + latlng.lng();
   }
   google.setOnLoadCallback(initializeGoogleMap);
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
 </script>
 
 
 <script>(function() {
   var  resultsOutput, searchInput;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   $("#man-loc-btn").click(function(){
     $("#main-content-A").hide();
     $("#main-content-C").hide();
@@ -430,7 +471,10 @@ var MAP_DIV_ELEMENT_ID = "google_map";
     $(".se-btn").removeClass("act-btn");
     $(this).addClass("act-btn"); $(".loc-btn").fadeOut();
   });
+<<<<<<< HEAD
+=======
 
+>>>>>>> 76c256b3e3f4d57a84551dcc201c3b6f9f91a122
   $("#loct-drop").click(function(){
     $(".loc-btn").fadeIn();
   });
