@@ -125,7 +125,7 @@ if(!$res){
 </head>
 <body>
 
-
+  <center><a href = "./index.php" style="text-decoration: none;"><h1>DocRec</h1></a></center>
   <div class="container" style = "position: absolute; top: 75px; min-width: 100%; background: #ecf0f1; min-height: 500px;">
     <div class = "row">
     <div class = "col-md-3 col-sm-4 col-xs-12" >
@@ -136,11 +136,10 @@ if(!$res){
       <div class = "profile-designation"><?php echo $res[0]["Specialist"]; ?></div>
       <!-- <div class = "utility-icons"><i class = "fa fa-upload"></i><i class = "fa fa-flag"></i><i class = "fa fa-eye"></i></div> -->
       <hr class = "bar">
-<<<<<<< HEAD
+
       <center><button style = "color: white; border: none; border-radius: 5px; width: 80%; padding: 10px; background: #1abc9c; margin-bottom: 10px;">Book An Appointment</button></center>
       <center><button style = "color: white; border: none; border-radius: 5px; width: 80%; padding: 10px; background: #1abc9c; margin-bottom: 10px;">Review This Doctor</button></center>
-=======
->>>>>>> ec71430054d7f7d0e2bcc1f338dcef5b8132f258
+
     </div>
     <div class = "col-md-9 col-sm-8 col-xs-12">
       <div style = "width: 91%; margin-left: 2%; margin-right: 7%; border-top: 5px solid #1abc9c;">
