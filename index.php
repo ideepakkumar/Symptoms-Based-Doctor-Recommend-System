@@ -3,6 +3,7 @@
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
+<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <style>
 body {
   background-color: white;
@@ -39,7 +40,8 @@ h3 {
 /* ============================ */
 .search-container {
   margin: 40px auto;
-  width: 400px;
+  background: aqua;
+  padding:20px;
 }
 
 .search-box {
@@ -184,32 +186,88 @@ h3 {
 #search:-moz-placeholder { /* Firefox 18- */
   color: rgba(0, 55, 0, 0.2); text-align: center;
 }
+.se-btn{
+      border: 2px solid white;
+      background: aqua;
+      padding: 15px;
+      color: #3a3737;
+      text-transform: uppercase;
+      font-size: 75%;
+      opacity: 0.5;
+}
+
+.act-btn{
+  opacity: 1;
+}
+.loc-btn{
+  border: 2px solid white;
+  background: green;
+  padding: 15px;
+  color: #3a3737;
+  text-transform: uppercase;
+  font-size: 75%;
+  visibility: hidden;
+}
+.act-loc-btn{
+  visibility: visible;
+}
 </style>
 
 </head>
 
 <body>
 
+
+  <!-- <button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script> -->
+
+
+
+
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <h1>DocRec</h1>
 <h2>Search a doctor</h2>
-<button class = "active">Search by name</button><button>Search by location</button><button>Get a symtom-based recommendation</button>
-<div id = "loc-opt">
-  <input type = "checkbox" value = "Delhi"/><label>Delhi</label>
-  <input type = "checkbox" value = "Chandigarh"/><label>Chandigarh</label>
-  <input type = "checkbox" value = "Mohali"/><label>Mohali</label>
-  <input type = "checkbox" value = "Jaipur"/><label>Jaipur</label>
-</div>
-<div class="search-container">
+<button class = "se-btn col-md-4 col-xs-12 act-btn">Search by name</button><button class = "se-btn col-md-4 col-xs-12" id = "loct-drop">Search by location</button><button class = "se-btn col-md-4 col-xs-12">Get a symtom-based recommendation</button>
+<center><button class = "loc-btn col-md-4">Search using GPS location</button><br/><button class = "loc-btn col-md-4">Manually select location</button></center>
+
+<div class="search-container col-md-6 col-sm-8 col-xs-12">
   <div class="search-box">
     <div class="search-icon"><i class="fa fa-search"></i></div>
     <input class="search-input" id="search" type="text" placeholder="Search by name">
     <ul class="search-results" id="results"><!--<li>Bessie</li><li>Flossie</li>--></ul>
   </div>
 </div>
+
 <script>(function() {
   var  resultsOutput, searchInput;
+
+  $(".se-btn").click(function(){
+    $(".se-btn").removeClass("act-btn");
+    $(this).addClass("act-btn");
+  });
+
+  $("#loct-drop").click(function(){
+    $(".loc-btn").toggleClass("act-loc-btn");
+  });
 
   searchInput = document.getElementById('search');
 
@@ -230,10 +288,10 @@ h3 {
     },
     function(data, status){
         if(status == "success"){
+          //console.log(data);
           var res = ""; data = JSON.parse(data);
           for(var i = 0; i < data.length; i += 1){
              res += "<li><a class = 'result-option' href = './newpro.php?q=" + data[i]["id"] + "'>" + data[i]["Doctor Name"] + "</a></li>";
-             //console.log(data[i]);
           }
           resultsOutput.innerHTML = res;
         }else console.log("Error");
