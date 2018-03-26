@@ -174,7 +174,7 @@ if(!$res){
                   </div></div>';
                   $i = $i + 1;
                 }
-              }      
+              }
               if($i == 0) echo "<div class = 'profile-info' style = 'background: #fbfbfb;'><small><i class = 'fa fa-ambulance'></i>&nbsp;&nbsp;No review is available for this doctor.</small></div>";
               ?>
       </div>
